@@ -1,0 +1,207 @@
+*{
+    box-sizing: border-box;
+}
+
+header,section{
+    overflow-x: hidden;
+}
+:root{
+    --Single-font:"Sniglet", cursive;
+    --Rubik: "Rubik", cursive;
+    --Patua:"Patua One", cursive;
+    --Lobster: "Lobster", cursive;
+    --light-black: #2e2c2caf;
+    --bggradient:linear-gradient(to bottom, #dd2476, #ff512f);
+    --light-gray:rgba(255,255,255,0.4)
+
+}
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* transition: top 0.3s, opacity 0.3s; */
+    background-color: #dd2476; /* Add your desired background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    transition: height 0.3s;
+}
+
+header.scrolled {
+    height: 50px; /* Add your desired height */
+}
+
+/* Additional animation effects */
+.navbar.fixed-navbar {
+    opacity: 0.9; /* Adjust the opacity level */
+}
+
+.main-content {
+    transition: margin-top 0.3s;
+}
+
+/* Example: Slide down effect on the header */
+header.scrolled .col-md-7 {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+header.scrolled .col-md-5 {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+header.scrolled img {
+    transform: scale(0.8);
+    transition: transform 0.3s;
+}
+
+
+header a{
+    font-family: var(--Single-font);
+    font-size: 0.9em;
+    color: whitesmoke;
+}
+
+header{
+    background: #dd2476;
+    background: var(--bggradient);
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a{
+    color:black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover{
+    background: #ddd;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+header .nav-item:last-child{
+    padding-right: 10.5em;
+
+}
+header .nav-item{
+    padding: 0.9em;
+}
+header .navbar-brand{
+    padding-left: 0.9em;
+}
+header .nav-link:hover{
+    color: black;
+}
+header .row .col-md-5{
+    padding: 4.2vmin 1vmin;
+}
+
+header .row .col-md-7{
+    padding: 22vmin 1vmin;
+    padding-bottom: 35vmin;
+    font-family: var(--Rubik);
+    color: white;
+}
+header .row .col-md-5 img{
+    width: 90%;
+}
+header .container .col-md-7 h6{
+    padding: 1vmin;
+    letter-spacing: 4px;
+}
+
+header .container .col-md-7 h1{
+    font-size: 8vmin;
+    font-weight: bold;
+    padding: 0.1em 0em;
+}
+header  .container .col-md-7 p{
+    padding: 1vmin 5vmin;
+}
+header .container .col-md-7 button{
+    border-radius: 30px;
+    /* font-weight: bold;    */
+    /* background-color: aliceblue; */
+}
+
+/* section */
+
+.section-1{
+    padding: 20vmin 0;
+}
+
+.section-1 .row .col-md-6 .pray img{
+    opacity: 0.8;
+    width: 80%;
+    border-radius: 0.2em;
+}
+.section-1 .row .col-md-6:last-child{
+    position: relative;
+}
+
+.section-1 .row .col-md-6 .panel{
+    position: absolute;
+    top: 7vmin;
+    left: -18vmin;
+    background: white;
+    border-radius: 3px;
+    text-align: left;
+    padding: 13vmin 5vmin 20vmin 10vmin;
+    padding: 0px 25px 42px rgba(0,0,0,0);
+    font-family: var(--Rubik);
+    z-index: 1;
+
+}
+.section-1 .row .col-md-6 .panel h1{
+    font-weight: bold;
+    padding: 0.4em 0;
+    font-size: 2em;
+}
+.section-1 .row .col-md-6 .panel p{
+    font-size: 0.9em;
+    color: rgba(0,0,0,0.5);
+
+}
+
+footer{
+    background: rgba(0,0,0,0.815);
+    overflow-x: hidden;
+    padding: 0vmin 18vmin;
+
+}
+footer span{
+        color: #dd2476;
+}
+ footer input{
+    border: none !important;
+ }
+ footer input::placeholder{
+    color: white !important;
+ }
+ footer .input-group .input-group-text{
+    background: var(--bggradient);
+    border: none;
+ }
+ footer .column i{
+    color: #dd2476;
+ }
+ footer .column i+i{
+    padding: 0 0.5em;
+ }
+ 
