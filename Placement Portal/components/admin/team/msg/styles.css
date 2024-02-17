@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Add a light background color */
+}
+
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Add a white background color */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9; /* Add a light gray background color */
+    border-radius: 4px; /* Add border radius for rounded corners */
+}
+
+.message {
+    margin-bottom: 8px; /* Add some spacing between messages */
+    padding: 8px; /* Add padding for each message */
+    background-color: #fff; /* Add a white background color for messages */
+    border-radius: 4px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for each message */
+    transition: background-color 0.3s; /* Add transition effect for background color */
+}
+
+.message:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+.message-input {
+    width: calc(100% - 70px);
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Add border radius for rounded corners */
+}
+
+.send-btn {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Add border radius for rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition effect for background color */
+}
+
+.send-btn:hover {
+    background-color: #45a049;
+}
+    

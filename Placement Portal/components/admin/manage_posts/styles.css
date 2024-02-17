@@ -1,0 +1,111 @@
+body {
+    background-color: #f8f9fc;
+}
+
+.add-post-button {
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; */
+}
+
+.add-post-button:hover {
+    background-color: #0056b3;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: popupFadeIn 0.5s ease-in-out forwards;
+}
+
+.popup p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.popup button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.popup button:hover {
+    background-color: #0056b3;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    background-color: #f8f9fc;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: 600;
+}
+
+.btn-view-cv {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-view-cv:hover {
+    background-color: #0056b3;
+}
