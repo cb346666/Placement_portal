@@ -170,5 +170,4 @@ $result = mysqli_query($conn, $query);
 
 <?php
 include('includes/scripts.php');
-include('includes/footer.php');
 ?>

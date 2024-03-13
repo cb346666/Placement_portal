@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Manage Posts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <link rel="stylesheet" href="./manage_posts/form.css">
@@ -12,113 +12,130 @@
 
 
     <style>
-    body {
-        background-color: #f8f9fc;
-    }
-
-    .add-post-button {
-        margin-bottom: 10px;
-        padding: 8px 16px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        /* float: right; */
-    }
-
-    .add-post-button:hover {
-        background-color: #0056b3;
-    }
-
-    .popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 20px;
-        border: 1px solid #007bff;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        animation: popupFadeIn 0.5s ease-in-out forwards;
-    }
-
-    .popup p {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-    }
-
-    .popup button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease-in-out;
-    }
-
-    .popup button:hover {
-        background-color: #0056b3;
-    }
-
-    @keyframes popupFadeIn {
-        from {
-            opacity: 0;
+        body {
+            background-color: #f8f9fc;
         }
 
-        to {
-            opacity: 1;
+        .add-post-button {
+            margin-bottom: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            /* float: right; */
         }
-    }
 
-    body {
-        background-color: #f8f9fc;
-    }
+        .add-post-button:hover {
+            background-color: #0056b3;
+        }
 
-    .container {
-        padding-top: 20px;
-    }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: popupFadeIn 0.5s ease-in-out forwards;
+        }
 
-    .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        .popup p {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
 
-    .table-responsive {
-        overflow-x: auto;
-    }
+        .popup button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-    .table {
-        border-radius: 10px;
-        overflow: hidden;
-    }
+        .popup button:hover {
+            background-color: #0056b3;
+        }
 
-    .table th,
-    .table td {
-        border-top: none;
-        border-bottom: 1px solid #dee2e6;
-    }
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+            }
 
-    .table th {
-        background-color: #f2f2f2;
-        color: #333;
-        font-weight: 600;
-    }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            /* padding-top: 20px; */
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table th,
+        .table td {
+            border-top: none;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: 600;
+        }
     </style>
 </head>
 
 <body>
     <?php
-    include('includes/header.php');
-    include('includes/navbar.php');
-    ?>
+    // Start the session (if not already started)
+    session_start();
 
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect the user to the login page if not logged in
+        header("Location: index.php");
+        exit(); // Stop further execution of the script
+    }
+
+    // Retrieve user data from the session
+    $user_id = $_SESSION['user_id'];
+    $user_role = $_SESSION['role']; // Assuming you store the user's role in the session
+    
+    // Example usage:
+    if ($user_role === "super_admin") {
+        // Include files specific to super admins
+        include('includes/header.php');
+        include('includes/navbar.php');
+    } elseif ($user_role === "staff") {
+        // Include files specific to staff
+        include('includes1/header.php');
+        include('includes1/navbar.php');
+    }
+    ?>
 
     <div id="addPostPopup" class="popup">
         <form id="postForm" enctype="multipart/form-data" style="padding: 20px;">
@@ -161,45 +178,57 @@
                 <tbody>
                     <!-- Job descriptions will be populated here -->
                     <?php
-            // Include the database connection file
-            include "db-connect.php";
+                    // Include the database connection file
+                    include "db-connect.php";
 
-            // SQL query to select job descriptions
-            $sql = "SELECT * FROM job_news";
-            $result = mysqli_query($conn, $sql);
+                    // SQL query to select job descriptions
+                    $sql = "SELECT * FROM job_news";
+                    $result = mysqli_query($conn, $sql);
 
-            // Check if there are any job descriptions
-            if (mysqli_num_rows($result) > 0) {
-                // Output job descriptions in a table body
-                while ($row = mysqli_fetch_assoc($result)) {
+                    // Check if there are any job descriptions
+                    if (mysqli_num_rows($result) > 0) {
+                        // Output job descriptions in a table body
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['company_name']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['job_title']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['description']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['file_upload']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['created_at']; ?>
+                                </td>
+                                <td>
+                                    <a href='./manage_posts/view.php?id=<?php echo $row['id']; ?>'
+                                        class='btn btn-info btn-sm'>View</a>
+                                    <a href='./manage_posts/edit.php?id=<?php echo $row['id']; ?>'
+                                        class='btn btn-primary btn-sm'>Edit</a>
+                                    <a href='./manage_posts/del.php?id=<?php echo $row['id']; ?>'
+                                        onclick='return confirm("Are you sure you want to delete this item?")'
+                                        class='btn btn-danger btn-sm'>Delete</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        // No job descriptions found
+                        echo "<tr><td colspan='7'>No job descriptions found.</td></tr>";
+                    }
+
+                    // Close the database connection
+                    mysqli_close($conn);
                     ?>
-                    <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['company_name']; ?></td>
-                        <td><?php echo $row['job_title']; ?></td>
-                        <td><?php echo $row['description']; ?></td>
-                        <td><?php echo $row['file_upload']; ?></td>
-                        <td><?php echo $row['created_at']; ?></td>
-                        <td>
-                            <a href='./manage_posts/view.php?id=<?php echo $row['id']; ?>'
-                                class='btn btn-info btn-sm'>View</a>
-                            <a href='./manage_posts/edit.php?id=<?php echo $row['id']; ?>'
-                                class='btn btn-primary btn-sm'>Edit</a>
-                            <a href='./manage_posts/del.php?id=<?php echo $row['id']; ?>'
-                                onclick='return confirm("Are you sure you want to delete this item?")'
-                                class='btn btn-danger btn-sm'>Delete</a>
-                        </td>
-                    </tr>
-                    <?php
-                }
-            } else {
-                // No job descriptions found
-                echo "<tr><td colspan='7'>No job descriptions found.</td></tr>";
-            }
-
-            // Close the database connection
-            mysqli_close($conn);
-            ?>
                 </tbody>
             </table>
         </div>
@@ -212,7 +241,6 @@
     <script src="./manage_posts/script.js"></script>
     <?php
     include('includes/scripts.php');
-    include('includes/footer.php');
     ?>
 </body>
 

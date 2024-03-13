@@ -6,55 +6,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scheduling</title>
+    <title>Calendar</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 
     <!-- integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
 
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./fullcalendar/lib/main.min.js"></script>
     <style>
-    :root {
-        --bs-success-rgb: 71, 222, 152 !important;
-    }
+        :root {
+            --bs-success-rgb: 71, 222, 152 !important;
+        }
 
-    html,
-    body {
-        height: 100%;
-        width: 100%;
-        /* font-family: Apple Chancery, cursive; */
-    }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            /* font-family: Apple Chancery, cursive; */
+        }
 
-    .btn-info.text-light:hover,
-    .btn-info.text-light:focus {
-        background: #000;
-    }
+        .btn-info.text-light:hover,
+        .btn-info.text-light:focus {
+            background: #000;
+        }
 
-    table,
-    tbody,
-    td,
-    tfoot,
-    th,
-    thead,
-    tr {
-        border-color: #ededed !important;
-        border-style: solid;
-        border-width: 1px !important;
-    }
+        table,
+        tbody,
+        td,
+        tfoot,
+        th,
+        thead,
+        tr {
+            border-color: #ededed !important;
+            border-style: solid;
+            border-width: 1px !important;
+        }
     </style>
 </head>
 
 <body class="bg-light">
     <?php
-    include('includes/header.php');
-    include('includes/navbar.php');
+    session_start();
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect the user to the login page if not logged in
+        header("Location: index.php");
+        exit(); // Stop further execution of the script
+    }
+
+    // Retrieve user data from the session
+    $user_id = $_SESSION['user_id'];
+    $user_role = $_SESSION['role']; // Assuming you store the user's role in the session
+    
+    // Example usage:
+    if ($user_role === "super_admin") {
+        // Include files specific to super admins
+        include('includes/header.php');
+        include('includes/navbar.php');
+    } elseif ($user_role === "staff") {
+        // Include files specific to staff
+        include('includes1/header.php');
+        include('includes1/navbar.php');
+    }
     ?>
     <div class="container py-5  " id="page-container">
         <div class="row">
@@ -157,13 +177,12 @@
     ?>
     <?php
     include('includes/scripts.php');
-    // include('includes/footer.php');
     ?>
 </body>
 
 
 <script>
-var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
 </script>
 <script src="./js/script.js"></script>
 

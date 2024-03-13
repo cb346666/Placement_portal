@@ -4,76 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Interested Students</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 
 
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <!-- <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script> -->
 
     <style>
-    body {
-        background-color: #f8f9fc;
-    }
+        body {
+            background-color: #f8f9fc;
+        }
 
-    .container {
-        padding-top: 20px;
-    }
+        .container {
+            /* padding-top: 20px; */
+        }
 
-    .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .table-responsive {
-        overflow-x: auto;
-    }
+        .table-responsive {
+            overflow-x: auto;
+        }
 
-    .table {
-        border-radius: 10px;
-        overflow: hidden;
-    }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-    .table th,
-    .table td {
-        border-top: none;
-        border-bottom: 1px solid #dee2e6;
-    }
+        .table th,
+        .table td {
+            border-top: none;
+            border-bottom: 1px solid #dee2e6;
+        }
 
-    .table th {
-        background-color: #f2f2f2;
-        color: #333;
-        font-weight: 600;
-    }
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: 600;
+        }
 
-    .btn-view-cv {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
+        .btn-view-cv {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
 
-    .btn-view-cv:hover {
-        background-color: #0056b3;
-    }
+        .btn-view-cv:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
 <body>
     <?php
-    include('includes/header.php');
-    include('includes/navbar.php');
+    // Start the session (if not already started)
+    session_start();
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect the user to the login page if not logged in
+        header("Location: index.php");
+        exit(); // Stop further execution of the script
+    }
+
+    // Retrieve user data from the session
+    $user_id = $_SESSION['user_id'];
+    $user_role = $_SESSION['role']; // Assuming you store the user's role in the session
+    
+    // Now you can use $user_role to determine the user's role and apply role-based access control
+    
+    // Example usage:
+    if ($user_role === "super_admin") {
+        // Include files specific to super admins
+        include('includes/header.php');
+        include('includes/navbar.php');
+    } elseif ($user_role === "staff") {
+        // Include files specific to staff
+        include('includes1/header.php');
+        include('includes1/navbar.php');
+    }
     ?>
     <div class="container">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Applications</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="generate_excel_report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
@@ -145,7 +169,6 @@
     <!-- <script src="./js/script.js"></script> -->
     <?php
     include('includes/scripts.php');
-    include('includes/footer.php');
     ?>
 
 </body>

@@ -1,134 +1,268 @@
-<?php
-include('includes/header.php');
-include('includes/navbar.php');
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- <link rel="stylesheet" href="authentication.css"> -->
+    <style>
+        /* Your existing styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-?>
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            animation: fadeIn 0.5s ease-in-out;
+            /* Fade-in animation */
+        }
 
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-in-out;
+            /* Slide-in from top animation */
+        }
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+        input[type="text"],
+        input[type="password"],
+        button {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            /* Smooth transition */
+        }
 
-    <!-- Page Heading
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div> -->
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4caf50;
+            /* Highlight input on focus */
+        }
 
-    <!-- Content Row -->
-    <div class="row">
-        <!-- <?php include('security.php'); ?> -->
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Registered
-                                Admin</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-                                $query = "SELECT user_id FROM staff_super_admins ORDER BY user_id";
-                                $query_run = mysqli_query($connection, $query);
-                                $row = mysqli_num_rows($query_run);
-                                echo '<h4> Total Admin: ' . $row . '</h4>';
-                                ?>
+        button:hover {
+            background-color: #45a049;
+        }
 
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
+        #message {
+            text-align: center;
+            color: red;
+            margin-top: 10px;
+            animation: slideInUp 0.5s ease-in-out;
+            /* Slide-in from bottom animation */
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Additional styles for responsiveness and interactivity */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            animation: fadeIn 0.5s ease-in-out;
+            /* Fade-in animation */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-in-out;
+            /* Slide-in from top animation */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4caf50;
+            /* Highlight input on focus */
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            text-align: center;
+            color: red;
+            margin-top: 10px;
+            animation: slideInUp 0.5s ease-in-out;
+            /* Slide-in from bottom animation */
+        }
+
+        /* Show/hide password eye icon */
+        .password-eye {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .loading-message,
+        .success-message {
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm" method="post" action="./database/admin_login.php">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <div style="position: relative;">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <!-- <span class="password-eye" onclick="togglePasswordVisibility()"> -->
+                <!-- <img src="eye-icon.png" alt="Show/Hide Password" width="20" height="20"> -->
+                <!-- </span> -->
             </div>
-        </div>
+            <button type="submit" id="loginBtn">Login</button>
+            <div id="loading" style="display: none;">Loading...</div>
+            <div id="success" style="display: none;">Login successful!</div>
+            <!-- <button type="submit" action="register.php">Register</button> -->
+        </form>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Registered
-                                Students
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-
-                                $query = "SELECT id FROM users ORDER BY id";
-                                $query_run = mysqli_query($connection, $query);
-                                $row = mysqli_num_rows($query_run);
-                                echo '<h4> Total Students: ' . $row . '</h4>';
-                                ?>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Interested Users
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-
-                                $query = "SELECT id FROM user_info ORDER BY id";
-                                $query_run = mysqli_query($connection, $query);
-                                $row = mysqli_num_rows($query_run);
-                                echo '<h4> Total: ' . $row . '</h4>';
-                                ?>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p>Don't have an account? <a href="admin_signup.php">Sign Up</a></p>
+        <p>Forgot your password? <a href="forget.php">Reset Password</a></p>
+        <p id="message"></p>
     </div>
 
-    <!-- Content Row -->
-    <?php
-    include('includes/scripts.php');
-    include('includes/footer.php');
-    ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- <script src="./js/login.js"></script> -->
+
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (e) {
+                e.preventDefault(); // Prevent form submission
+                $('#loading').show(); // Show loading message
+                $.ajax({
+                    url: './database/admin_login.php',
+                    type: 'POST',
+                    data: $(this).serialize(), // Serialize form data
+                    success: function (response) {
+                        $('#loading').hide(); // Hide loading message
+                        var data = JSON.parse(response); // Parse JSON response
+                        if (data.status === "success") {
+                            if (data.role === "staff") {
+                                window.location.href =
+                                    '../admin/placement_team.php'; // Redirect staff to staff index page
+                            } else if (data.role === "super_admin") {
+                                window.location.href =
+                                    '../admin/super_admin.php'; // Redirect super admin to super admin index page
+                            }
+                        } else {
+                            $('#message').text(data.message); // Display error message
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('#loading').hide();
+                        $('#message').text("An error occurred while processing your request");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+
+</html>

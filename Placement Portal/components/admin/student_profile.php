@@ -1,7 +1,27 @@
 <?php
-include('includes/header.php');
-include('includes/navbar.php');
+session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page if not logged in
+    header("Location: index.php");
+    exit(); // Stop further execution of the script
+}
+
+// Retrieve user data from the session
+$user_id = $_SESSION['user_id'];
+$user_role = $_SESSION['role']; // Assuming you store the user's role in the session
+
+// Example usage:
+if ($user_role === "super_admin") {
+    // Include files specific to super admins
+    include('includes/header.php');
+    include('includes/navbar.php');
+} elseif ($user_role === "staff") {
+    // Include files specific to staff
+    include('includes1/header.php');
+    include('includes1/navbar.php');
+}
 // Include database connection file
 include_once("db-connect.php");
 

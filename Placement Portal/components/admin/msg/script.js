@@ -4,33 +4,42 @@ $(document).ready(function() {
         var messageContent = $('#message-input').val().trim();
         if (messageContent !== '') {
             $.ajax({
-                url: 'send_message.php',
+                url: './msg/send_message.php',
                 type: 'POST',
-                data: { message: messageContent }, // Send message content
+                data: {
+                    message: messageContent
+                },
                 success: function(response) {
-                    // Clear input field after successful message send
+                    console.log('Message sent successfully:', response);
                     $('#message-input').val('');
-                    // Fetch and display messages to update the chat
-                    fetchMessages();
+                    alert('Message sent successfully!');
                 },
                 error: function(xhr, status, error) {
                     console.error('Error sending message:', error);
+                    alert('Error sending message. Please try again later.');
                 }
             });
+        } else {
+            alert('Message content cannot be empty.');
         }
     }
 
     // Function to fetch messages
     function fetchMessages() {
         $.ajax({
-            url: 'fetch_messages.php',
+            url: './msg/fetch_messages.php',
             type: 'GET',
             success: function(response) {
+                console.log('Messages fetched successfully:', response);
                 // Append fetched messages to the message box
                 $('#chat-messages').html(response);
+                // Clear any previous error message
+                $('#error-message').hide();
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching messages:', error);
+                // Display error message
+                $('#error-message').show();
             }
         });
     }
